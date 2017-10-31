@@ -1,55 +1,507 @@
+/*
+    File Content:
+        1. Variables
+        2. Mixins
+        3. Keyframes
+        4. Global Styles
+        5. Pre-loader Styles
+        6. Menu Styles
+        7. Lead Styles
+        8. About Styles
+        9. Portfolio Styles
+        10. Photostudio Styles
+        11. Services Styles
+        12. Contact Styles
+        13. Footer Styles
+        14. Media Queries
+        15. Color Schemes
+*/
+
+/*
+    ------------------------
+    ----- 1. Variables -----
+    ------------------------
+*/
+// Background wing color
 $wing-color: #4D4D4D;
+$loader_big: 600px;
 
+
+
+/*
+    ---------------------
+    ----- 2. Mixins -----
+    ---------------------
+*/
+@mixin transition($duration: 0.5s, $func: ease, $property: all) {
+  transition: #{$duration} #{$func} #{$property};
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:-moz-placeholder {
+    @content;
+    opacity: 1;
+  }
+
+  &::-moz-placeholder {
+    @content;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+
+
+/*
+    ------------------------
+    ----- 3. Keyframes -----
+    ------------------------
+*/
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/*
+    ----------------------------
+    ----- 4. Global Styles -----
+    ----------------------------
+*/
 html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-.left-wing {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 9000;
-  background: $wing-color;
-  height: 100%;
-  width: 50%;
-
-  img.wing {
-    position: absolute;
-    top: 50%;
-    margin-top: -300px;
-    right: 0;
-    z-index: 9001;
-  }
-}
-
-.right-wing {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 9000;
-  background: $wing-color;
-  height: 100%;
-  width: 50%;
-
-  img.wing {
-    position: absolute;
-    top: 50%;
-    margin-top: -300px;
-    left: 0;
-    z-index: 9001;
-  }
-}
-
-.air-lock-cover {
-  position: fixed;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 100%;
-  z-index: 9002;
+  overflow: hidden;
+  background: #dcd9d9;
 }
 
-img.wing {
-  height: 600px;
+.heading {
+  text-decoration: none;
+  font-family: 'Merriweather', serif;
+  text-transform: uppercase;
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+.body {
+  padding: 0 0 40px 0;
+}
+
+
+
+/*
+    --------------------------------
+    ----- 5. Pre-loader Styles -----
+    --------------------------------
+*/
+#pre-loader{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5000;
+  height: 100%;
+  width: 100%;
+
+  .left-wing, .right-wing {
+    position: absolute;
+    top: 0;
+    z-index: 9000;
+    background: $wing-color;
+    height: 100%;
+    width: 50%;
+
+    img.wing {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 100%;
+      max-height: 600px;
+      z-index: 9001;
+    }
+  }
+
+  .left-wing {
+    left: 0;
+    img.wing {
+      right: 0;
+    }
+  }
+
+  .right-wing {
+    right: 0;
+    img.wing {
+      left: 0;
+    }
+  }
+
+  .air-lock-cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9100;
+  }
+
+  .loader-wrapper {
+    max-height: $loader_big;
+    height: $loader_big;
+    width: $loader_big;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 9090;
+    transform: translate(-50%, -50%);
+
+    .loader-p1 {
+      border: 7px solid #b3b3b3;
+      border-top: 7px solid #be3412;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      animation: spin 12s linear infinite;
+    }
+
+    .loader-p2,.loader-p3,.loader-p4 {
+      border: 7px solid rgba(179, 179, 179, 0);
+      border-top: 7px solid #be3412;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9091;
+    }
+
+    .loader-p2 {
+      animation: spin 6s linear infinite;
+    }
+
+    .loader-p3 {
+      animation: spin 4s linear infinite;
+    }
+
+    .loader-p4 {
+      animation: spin 3s linear infinite;
+    }
+  }
+}
+
+
+
+/*
+    --------------------------
+    ----- 6. Menu Styles -----
+    --------------------------
+*/
+#menu-wrapper {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+
+  .logo-xs {
+    float: left;
+  }
+
+  .menu-xs {
+    float: right;
+  }
+
+  .menu-xs, .logo-xs {
+    color: #fff;
+    padding: 10px;
+    margin: 5px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 3px;
+  }
+
+  #menu {
+    .item {
+      padding: 0;
+      background: #fff;
+      height: 100%;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+
+      a {
+        display: block;
+        padding: 10px 10px;
+        margin: 5px 5px;
+        color: #393939;
+        text-decoration: none;
+        font-family: 'Merriweather', serif;
+        text-transform: uppercase;
+
+        &:hover {
+          background: #eee;
+          border-radius: 3px;
+          color: #202020;
+        }
+      }
+    }
+  }
+}
+
+
+
+/*
+    --------------------------
+    ----- 7. Lead Styles -----
+    --------------------------
+*/
+#lead {
+  height: 100%;
+  width: 100%;
+
+  .lead-bg {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    filter: brightness(30%);
+  }
+
+  .lead-body {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: auto;
+    //padding: px 0;
+    color: #ffffff;
+    font-family: 'Noto Serif', serif;
+    font-size: 45px;
+    text-align: center;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+
+    .lead-underline {
+      width: 70%;
+      height: 2px;
+      background: #b3b3b3;
+      position: absolute;
+      bottom: -19px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  img {
+    position: relative;
+    left: 50%;
+    top: 0;
+    -webkit-transform: translateX(-50%);
+    z-index: 400;
+  }
+}
+
+
+
+/*
+    --------------------------------
+    ----- 8. About Styles -----
+    --------------------------------
+*/
+#about {
+  img {
+    box-shadow: 0 1px 1px #131313;
+    margin-bottom: 5%;
+  }
+}
+
+
+
+/*
+    --------------------------------
+    ----- 9. Portfolio Styles -----
+    --------------------------------
+*/
+#portfolio {
+  .col-xs-12,.col-sm-6,.col-md-4 {
+    img {
+      box-shadow: 0 1px 1px #131313;
+      margin-bottom: 5%;
+    }
+  }
+}
+
+
+
+/*
+    ----------------------------------
+    ----- 10. Photostudio Styles -----
+    ----------------------------------
+*/
+#photostudio {
+  img {
+    box-shadow: 0 1px 1px #131313;
+    margin-bottom: 5%;
+  }
+}
+
+
+
+/*
+    -------------------------------
+    ----- 11. Services Styles -----
+    -------------------------------
+*/
+#services {
+  .col-xs-12,.col-sm-6 {
+    .pane {
+      background: #ffffff;
+      box-shadow: 1px 1px 1px #a5a2a2;
+      margin: 10px;
+      padding: 20px;
+      border-radius: 3px;
+
+      .pane-head{
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+
+
+/*
+    ------------------------------
+    ----- 12. Contact Styles -----
+    ------------------------------
+*/
+#contact {
+  padding-bottom: 0 !important;
+  margin: 0;
+
+  #map {
+    height: 300px;
+    width: 100%;
+    border-top: 1px solid #b3b3b3;
+    border-bottom: 1px solid #b3b3b3;
+  }
+
+  .contact-form {
+    max-width: 500px;
+    margin: 0 auto 20px;
+
+    input, textarea {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      margin-bottom: 10px;
+      background: darken(#be3412, 15%);
+      color: #fff;
+      @include transition();
+      @include placeholder {
+        color: #fff;
+      }
+
+      &:focus {
+        outline: none;
+        background: darken(#be3412, 25%);
+      }
+    }
+
+    textarea {
+      height: 150px;
+      resize: none;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      background: #be3412;
+      border-radius: 4px;
+      padding: 5px 10px;
+      border: none;
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      @include transition();
+
+      &:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      }
+    }
+  }
+}
+
+
+
+/*
+    ---------------------------------
+    ----- 13. Pre-loader Styles -----
+    ---------------------------------
+*/
+#footer {
+  height: 40px;
+}
+
+
+
+/*
+    -----------------------------
+    ----- 14. Media Queries -----
+    -----------------------------
+*/
+@media only screen and (max-width: 768px) {
+  #awards {
+    .img-responsive {
+      padding: 30px;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px){
+  #pre-loader{
+    .left-wing, .right-wing{
+      height: 100%;
+
+      img.wing {
+        width: 150px;
+        height: 300px;
+      }
+    }
+
+    .loader-wrapper {
+      width: 300px;
+      height: 300px;
+    }
+  }
+}
+
+
+
+/*
+    ----------------------------
+    ----- 15. Color Schemes ----
+    ----------------------------
+*/
+.-white-black {
+  background: #ffffff;
+  color: #131313;
+}
+
+.-red-white {
+  background: #be3412;
+  color: #ffffff;
 }
